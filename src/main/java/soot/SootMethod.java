@@ -450,8 +450,14 @@ public class SootMethod extends AbstractHost implements ClassMember, MethodOrMet
         throw new RuntimeException("No method source set for method " + this);
       }
 
-      // Method sources are not expected to be thread safe
-      activeBody = ms.getBody(this, "jb");
+      try {
+        // Method sources are not expected to be thread safe
+        activeBody = ms.getBody(this, "jb");
+      } catch (Exception e) {
+        logger.warn("Failed to build body for method " + this);
+        setPhantom(true);
+        return null;
+      }
 
       // Call the consumer such that clients can update any data structures, caches, etc.
       // atomically before the body is available to other threads.
