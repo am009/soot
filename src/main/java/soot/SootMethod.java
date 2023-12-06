@@ -455,7 +455,8 @@ public class SootMethod extends AbstractHost implements ClassMember, MethodOrMet
         activeBody = ms.getBody(this, "jb");
       } catch (Exception e) {
         logger.warn("Failed to build body for method " + this);
-        setPhantom(true);
+        // setPhantom(true);
+        getDeclaringClass().setLibraryClass();
         return null;
       }
 
