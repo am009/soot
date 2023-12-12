@@ -1,3 +1,15 @@
+### 防止Soot报错直接退出
+
+在加载类的时候做出修改，增加了捕获，如果加载失败会打印异常。
+
+此外，为了节约内存还可以设置OAAT，然后设置每次加载class之后直接释放。但是代码需要写到trasform里，然后加到pack里。
+
+```
+Options.v().set_oaat(true);
+Options.v().set_no_writeout_body_releasing(false);
+```
+
+
 [![Build Status](https://github.com/soot-oss/soot/workflows/Soot%20CI/badge.svg?branch=develop)](https://github.com/soot-oss/soot/actions)
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/soot-oss/soot) 
 
